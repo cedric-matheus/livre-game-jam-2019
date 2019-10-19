@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 // TODO: load webfonts
 // import WebFont from 'webfontloader';
 
-import { Potion, TargetPotion } from '../gameObjects';
+import { Potion, TargetPotion, ColorSystem } from '../gameObjects';
 
 class Game extends Phaser.Scene {
   constructor() {
@@ -18,17 +18,27 @@ class Game extends Phaser.Scene {
     //     families: ['Droid Sans', 'Droid Serif'],
     //   },
     // });
+    // FIXME: add player
     // add player potion
-    this.potion = new Potion(this);
+    // this.potion = new Potion(this);
+    // add color system
+    this.colorSystem = new ColorSystem(this);
   }
 
   create() {
     // TODO: implement controls
+    // this.input.on('pointerdown', () => {
+    //   console.log('teste');
+    //   this.potion.addColor('r');
+    // });
     this.input.on('pointerdown', () => {
-      console.log('teste');
-      this.potion.addColor('r');
+      if (this.colorSystem.isOpen) {
+        this.colorSystem.closeFaucet();
+      } else {
+        this.colorSystem.openFaucet();
+      }
     });
-    // TODO: add target potion
+    // FIXME: add target potion
     // add target potion
     // this.targetPotion = new TargetPotion(
     //   this,
