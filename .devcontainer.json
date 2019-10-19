@@ -1,0 +1,13 @@
+// See https://aka.ms/vscode-remote/devcontainer.json for format details or
+// https://aka.ms/vscode-dev-containers/definitions for sample configurations.
+{
+  "dockerComposeFile": "docker-compose.dev.yml",
+  "service": "livre-game-jam-2019",
+  "workspaceFolder": "/livre-game-jam-2019",
+  "extensions": [
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ],
+  "shutdownAction": "stopCompose"
+}
