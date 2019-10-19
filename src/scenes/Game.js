@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
+
 import Potion from '../gameObjects/Potion';
+import TargetPotion from '../gameObjects/TargetPotion';
 
 class Game extends Phaser.Scene {
   constructor() {
@@ -13,6 +15,9 @@ class Game extends Phaser.Scene {
 
     // add player potion
     this.potion = new Potion(this);
+
+    // add target potion
+    this.targetPotion = new TargetPotion(this);
   }
 
   update() {}
