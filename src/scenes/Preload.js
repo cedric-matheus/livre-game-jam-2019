@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 
+import woodPlankImg from '../assets/woodPlank.png';
+
 class Preload extends Phaser.Scene {
   constructor() {
     // set scene key
@@ -11,6 +13,7 @@ class Preload extends Phaser.Scene {
     this.logo = this.add.image(400, 300, 'logo');
 
     // load game assets
+    this.load.image('woodPlank', woodPlankImg);
   }
 
   create() {
