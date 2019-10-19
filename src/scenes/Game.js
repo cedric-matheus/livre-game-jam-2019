@@ -1,17 +1,21 @@
 import Phaser from 'phaser';
+import Potion from '../gameObjects/Potion';
 
 class Game extends Phaser.Scene {
-  constructor () {
+  constructor() {
     // set scene key
     super('Game');
   }
 
-  create () {
+  create() {
     // show logo
     this.logo = this.add.image(400, 300, 'logo');
+
+    // add player potion
+    this.potion = new Potion(this);
   }
 
-  update () {}
+  update() {}
 }
 
 export default Game;

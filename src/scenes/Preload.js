@@ -1,19 +1,19 @@
 import Phaser from 'phaser';
 
 class Preload extends Phaser.Scene {
-  constructor () {
+  constructor() {
     // set scene key
     super('Preload');
   }
 
-  preload () {
+  preload() {
     // show loading screen
     this.logo = this.add.image(400, 300, 'logo');
 
     // load game assets
   }
 
-  create () {
+  create() {
     // start game scene
     this.scene.start('Game');
   }

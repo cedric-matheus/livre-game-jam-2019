@@ -7,7 +7,7 @@ const config = {
   parent: 'phaser-example',
   width: 800,
   height: 600,
-  scene: scenes
+  scene: scenes,
 };
 
 export default config;
