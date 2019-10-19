@@ -1,0 +1,111 @@
+<pre>
+	
+Esse arquivo contém: 
+
+
+- mixer de cores com porcentagem; 
+- lista de todas as cores 16 bits
+- função de decimal para  hex
+- função de hex para 16 bits
+
+
+<script type="text/javascript">
+	
+
+document.write('<hr/>');
+document.write('COLOR MIXER</br>');
+
+//colorChannelA and colorChannelB are ints ranging from 0 to 255
+function colorChannelMixer(colorChannelA, colorChannelB, amountToMix){
+    var channelA = colorChannelA*amountToMix;
+    var channelB = colorChannelB*(1-amountToMix);
+    return parseInt(channelA+channelB);
+}
+//rgbA and rgbB are arrays, amountToMix ranges from 0.0 to 1.0
+//example (red): rgbA = [255,0,0]
+function colorMixer(rgbA, rgbB, amountToMix){
+    var r = colorChannelMixer(rgbA[0],rgbB[0],amountToMix);
+    var g = colorChannelMixer(rgbA[1],rgbB[1],amountToMix);
+    var b = colorChannelMixer(rgbA[2],rgbB[2],amountToMix);
+    return "rgb("+r+","+g+","+b+")";
+}
+
+mixedColor = colorMixer([255,0,0], [0,0,255], 0.5);//returns "rgb(127,0,127)" (purple))
+// console.log(mixedColor);
+
+html = '<div style="background-color: ' + "#0000FF" + '; width: 200px height: 200px;">#' + "0000FF" + '</div>'
+document.write(html);
+document.write("+");
+html = '<div style="background-color: ' + "#FF0000" + '; width: 200px height: 200px;">#' + "FF0000" + '</div>'
+document.write(html);
+document.write("=");
+html = '<div style="background-color: ' + mixedColor + '; width: 200px height: 200px;">#' + mixedColor + '</div>'
+document.write(html);
+
+
+document.write('<hr/>');
+
+
+
+ function hex24BitToHex16bit(string_color){
+  var color_24_bit_int = parseInt(string_color, 16);
+  var r = (color_24_bit_int >> 16) & 0xFF;
+  var g = (color_24_bit_int >> 8) & 0xFF;
+  var b = color_24_bit_int & 0xFF;
+  var r565 = r >> 3;
+  var g565 = g >> 2;
+  var b565 = b >> 3;
+  var rgb565 = (r565 << 11) ^ (g565 << 5) ^ b565;
+  return rgb565;
+ }
+
+
+function decimalToHexString(number)
+{
+  if (number < 0)
+  {
+    number = 0xFFFFFFFF + number + 1;
+  }
+  return number.toString(16).toUpperCase();
+}
+
+
+function pad(num, size) {
+    var s = "000000000" + num;
+    return s.substr(s.length-size);
+}
+
+i = 0; 
+
+
+colors = [];
+rgb = [];
+ra = [];
+ga = [];
+ba = [];
+
+for(r = 0; r < 32; r++ ) {
+	for(g = 0; g < 64; g++ ) {
+		for(b = 0; b < 32; b++ ) {
+			hexString1 = r.toString(16);	
+			hexString2 = g.toString(16);	
+			hexString3 = b.toString(16);	
+			colors[i] = hexString1 + hexString2 + hexString3;
+			i++;
+
+		}
+	}
+}
+
+
+document.write('<hr/>');
+document.write('TODAS AS CORES 16 BITS</br>');
+
+for (var i = 0; i < 65536; i++) {
+	html = '<div style="background-color: #' +  colors[i] +'; width: 200px height: 200px;">#'+colors[i] + '</div>'
+	document.write(html);
+}
+
+
+
+</script>
