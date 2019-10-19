@@ -18,12 +18,16 @@ class Game extends Phaser.Scene {
     //     families: ['Droid Sans', 'Droid Serif'],
     //   },
     // });
+    // add player potion
+    this.potion = new Potion(this);
   }
 
   create() {
-    // add player potion
-    this.potion = new Potion(this);
-
+    // TODO: implement controls
+    this.input.on('pointerdown', () => {
+      console.log('teste');
+      this.potion.addColor('r');
+    });
     // TODO: add target potion
     // add target potion
     // this.targetPotion = new TargetPotion(
