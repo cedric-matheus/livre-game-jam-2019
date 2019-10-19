@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 services:
   livre-game-jam-2019:
@@ -8,5 +8,6 @@ services:
       - ./:/livre-game-jam-2019
     working_dir: /livre-game-jam-2019
     ports:
-      - 8:8
+      - ${PORT}:${PORT}
     tty: true
+    stdin_open: true
