@@ -8,6 +8,6 @@ services:
       - ./:/livre-game-jam-2019
     working_dir: /livre-game-jam-2019
     ports:
-      - ${PORT}:${PORT}
+      - ${PORT}:8080
     tty: true
     stdin_open: true
