@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 
-import Potion from '../gameObjects/Potion';
-import TargetPotion from '../gameObjects/TargetPotion';
+import { Potion, TargetPotion } from '../gameObjects';
 
 class Game extends Phaser.Scene {
   constructor() {
@@ -10,14 +9,15 @@ class Game extends Phaser.Scene {
   }
 
   create() {
-    // show logo
-    this.logo = this.add.image(400, 300, 'logo');
-
     // add player potion
     this.potion = new Potion(this);
 
     // add target potion
-    this.targetPotion = new TargetPotion(this);
+    this.targetPotion = new TargetPotion(
+      this,
+      'Poção do Amor',
+      'rgb(255, 0, 0)'
+    );
   }
 
   update() {}
