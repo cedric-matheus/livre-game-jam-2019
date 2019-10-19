@@ -1,4 +1,13 @@
 {
   "editor.formatOnSave": true,
-  "eslint.autoFixOnSave": true
+  "eslint.autoFixOnSave": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.disableLanguages": [
+    "vue",
+    "typescript",
+    "markdown"
+  ],
+  "prettier.arrowParens": "always",
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5"
 }
