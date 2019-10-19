@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  livre-game-jam-2019:
+    container_name: livre-game-jam-2019
+    image: node:lts
+    volumes:
+      - ./:/livre-game-jam-2019
+    working_dir: /livre-game-jam-2019
+    ports:
+      - 8:8
+    tty: true
