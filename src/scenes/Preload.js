@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 
 import woodPlankImg from '../assets/woodPlank.png';
+import emptyBottleImg from '../assets/emptyBottle.png';
 
 class Preload extends Phaser.Scene {
   constructor() {
@@ -14,6 +15,7 @@ class Preload extends Phaser.Scene {
 
     // load game assets
     this.load.image('woodPlank', woodPlankImg);
+    this.load.image('emptyBottle', emptyBottleImg);
   }
 
   create() {
