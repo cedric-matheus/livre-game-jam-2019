@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
-import woodPlankImg from '../assets/woodPlank.png';
-import emptyBottleImg from '../assets/emptyBottle.png';
+import woodPlankImg from '../assets/images/woodPlank.png';
+import emptyBottleImg from '../assets/images/emptyBottle.png';
 
 class Preload extends Phaser.Scene {
   constructor() {

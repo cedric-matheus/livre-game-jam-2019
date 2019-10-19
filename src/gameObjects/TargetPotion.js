@@ -1,5 +1,8 @@
 import Phaser from 'phaser';
 
+// TODO: load webfonts
+// TODO: add eder assets
+
 class TargetPotion extends Phaser.GameObjects.Sprite {
   constructor(scene, title = null, targetColor = null) {
     super(scene);
@@ -7,7 +10,7 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
     const plankX = 400;
     const plankY = 300;
 
-    const bottleWidth = 82;
+    // const bottleWidth = 82;
     const bottleHeight = 180;
 
     const addYBottle = 100;
@@ -55,10 +58,10 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
     // tint potion fluid
     this.potionFluid.setTint(targetColorInteger);
     // add title text
-    scene.add.text(150, 350, 'Waves flung themselves\nat the blue evening.', {
-      fontFamily: 'Modak',
+    scene.add.text(200, 100, this.title, {
+      fontFamily: 'Droid Serif',
       fontSize: 64,
-      color: '#5656ee',
+      color: '#000',
     });
   }
 }
