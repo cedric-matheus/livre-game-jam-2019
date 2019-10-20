@@ -20,6 +20,8 @@ class Game extends Phaser.Scene {
       this.tableWidth / 2 -
       (DEFAULT_WIDTH - this.tableWidth) / 2;
     this.tableY = DEFAULT_HEIGHT - this.tableHeight / 2;
+
+    this.handwheelRotationSpeed = 4;
   }
 
   preload() {
@@ -52,13 +54,6 @@ class Game extends Phaser.Scene {
     //   console.log('teste');
     //   this.potion.addColor('r');
     // });
-    // this.input.on('pointerdown', () => {
-    //   if (this.colorSystem.isOpen) {
-    //     this.colorSystem.closeFaucet();
-    //   } else {
-    //     this.colorSystem.openFaucet();
-    //   }
-    // });
     // FIXME: add target potion
     // add target potion
     // this.targetPotion = new TargetPotion(
@@ -68,7 +63,17 @@ class Game extends Phaser.Scene {
     // );
   }
 
-  update() {}
+  update() {
+    if (this.colorSystem.handwheelStatus === 'opened') {
+    } else if (this.colorSystem.handwheelStatus === 'closed') {
+    } else if (this.colorSystem.handwheelStatus === 'closing') {
+      const handwheelNewAngle = (this.colorSystem.handwheel.angle -= this.handwheelRotationSpeed);
+      this.colorSystem.handwheel.setAngle(handwheelNewAngle);
+    } else if (this.colorSystem.handwheelStatus === 'opening') {
+      const handwheelNewAngle = (this.colorSystem.handwheel.angle += this.handwheelRotationSpeed);
+      this.colorSystem.handwheel.setAngle(handwheelNewAngle);
+    }
+  }
 }
 
 export default Game;

@@ -6,72 +6,171 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
   constructor(scene) {
     super(scene);
 
-    this.colorPosition = 0;
-    this.colors = ['r', 'g', 'b'];
-    this.totalColors = this.colors.length;
-    this.isOpen = false;
+    scene.input.addPointer(2);
 
     const pipeHeight = 921;
     const pipeWidth = 986;
     const pipeX = pipeWidth / 2;
     const pipeY = DEFAULT_HEIGHT * 0.48;
 
-    const handwheelWidth = 265;
-    const handwheelHeight = 265;
+    // const handwheelWidth = 265;
+    // const handwheelHeight = 265;
     const handwheelX = pipeWidth * 0.56;
     const handwheelY = DEFAULT_HEIGHT - pipeHeight * 0.98;
 
-    const colorDropX = pipeX + 100;
-    const colorDropY = pipeY - 35;
+    const jetX = pipeWidth * 0.948;
+    const jetY = pipeY * 0.9;
 
-    const colorSelectX = 100;
-    const colorSelectY = 600;
+    const jetBrightX = pipeWidth * 0.948;
+    const jetBrightY = pipeY * 0.9;
 
-    this.colorDropX = colorDropX;
-    this.colorDropY = colorDropY;
+    const colorSwatchX = pipeWidth * 0.175;
+    const colorSwatchY = pipeHeight * 0.62;
+
+    const colorSwatchFluidX = colorSwatchX + 25;
+    const colorSwatchFluidY = colorSwatchY - 45;
+
+    const colorSwatchLenX = colorSwatchFluidX;
+    const colorSwatchLenY = colorSwatchFluidY + 19;
+
+    this.colorPosition = 0;
+    this.colors = ['r', 'g', 'b'];
+    this.totalColors = this.colors.length;
+    this.maxColorLimit = 220;
+    this.minColorLimit = 50;
+
+    /*
+     * handwhell status
+     * closed
+     * opened
+     * opening
+     * closing
+     */
+    this.handwheelStatus = 'closed';
+
+    this.jetParticlesX = jetX;
+    this.jetParticlesY = jetY * 0.6;
+
+    // create jet
+    this.jet = scene.add.image(jetX, jetY, 'jet');
+    // tint jet
+    this.jet.setTint(this.getColorInteger());
+    // create jet bright
+    this.jetBright = scene.add.image(jetBrightX, jetBrightY, 'jetBright');
+
+    // create jet particles
+    this.jetParticles = scene.add.particles('jetParticles');
+    // create jet particles emmiter
+    this.jetParticlesEmitter = this.jetParticles.createEmitter({
+      x: this.jetParticlesX,
+      y: this.jetParticlesY,
+      quantity: 2,
+      frequency: 2,
+      angle: { min: 89, max: 91 },
+      speed: 300,
+      gravityY: 300,
+      lifespan: { min: 1000, max: 2000 },
+    });
+    // disable jet particles emmiter
+    this.jetParticlesEmitter.stop();
+    // disable jet particle visibility
+    this.jetParticles.visible = false;
+    // add mask to jet
+    this.jet.mask = new Phaser.Display.Masks.BitmapMask(
+      scene,
+      this.jetParticles
+    );
+    // add mask to jet bright
+    this.jetBright.mask = new Phaser.Display.Masks.BitmapMask(
+      scene,
+      this.jetParticles
+    );
 
     // add pipe
     this.pipe = scene.add.image(pipeX, pipeY, 'pipe');
 
     // add handwheel
     this.handwheel = scene.add.image(handwheelX, handwheelY, 'handwheel');
-
-    // add color select
-    this.colorSelect = scene.add.image(
-      colorSelectX,
-      colorSelectY,
-      'colorSelect'
+    // create handwheel hit area
+    const handWheelFrame = this.handwheel.frame;
+    const handwheelHitArea = new Phaser.Geom.Rectangle(
+      handWheelFrame.x,
+      handWheelFrame.y,
+      handWheelFrame.width,
+      handWheelFrame.height
     );
-    // tint color select
-    this.colorSelect.setTint(this.getColorInteger());
-
-    // create drop particles
-    this.particles = scene.add.particles('colorDrop');
-    // create drop emmiter
-    this.emitter = this.particles.createEmitter({
-      x: colorDropX,
-      y: colorDropY,
-      tint: this.getColorInteger(),
-      quantity: 5,
-      frequency: 25,
-      angle: { min: 86, max: 94 },
-      speed: 200,
-      gravityY: 200,
-      lifespan: { min: 1000, max: 2000 },
+    this.handwheel.setInteractive(
+      handwheelHitArea,
+      Phaser.Geom.Rectangle.Contains
+    );
+    // add handle events to handwheel
+    this.handwheel.on('pointerdown', () => this.toggleFaucet());
+    this.handwheel.on('pointerover', (pointer) => {
+      if (pointer.isDown) {
+        this.toggleFaucet();
+      }
     });
-    // disable drop emmiter
-    this.emitter.stop();
+
+    // add color swatch
+    this.colorSwatch = scene.add.image(
+      colorSwatchX,
+      colorSwatchY,
+      'colorSwatch'
+    );
+    // create color swatch hit area
+    const colorSwatchFrame = this.colorSwatch.frame;
+    const colorSwatchHitArea = new Phaser.Geom.Rectangle(
+      colorSwatchFrame.x,
+      colorSwatchFrame.y,
+      colorSwatchFrame.width,
+      colorSwatchFrame.height
+    );
+    this.colorSwatch.setInteractive(
+      colorSwatchHitArea,
+      Phaser.Geom.Rectangle.Contains
+    );
+    // add handle events to color swatch
+    this.colorSwatch.on('pointerdown', () => this.changeColor());
+    this.colorSwatch.on('pointerover', (pointer) => {
+      if (pointer.isDown) {
+        this.changeColor();
+      }
+    });
+
+    // add color swatch fluid
+    this.colorSwatchFluid = scene.add.image(
+      colorSwatchFluidX,
+      colorSwatchFluidY,
+      'colorSwatchFluid'
+    );
+    // tint color swatch fluid
+    this.colorSwatchFluid.setTint(this.getColorInteger());
+
+    // add color swatch len
+    this.colorSwatchLen = scene.add.image(
+      colorSwatchLenX,
+      colorSwatchLenY,
+      'colorSwatchLen'
+    );
+  }
+
+  toggleFaucet() {
+    if (this.handwheelStatus === 'opened') {
+      this.closeFaucet();
+    } else if (this.handwheelStatus === 'closed') {
+      this.openFaucet();
+    }
   }
 
   getRGB() {
     const color = this.colors[this.colorPosition];
     switch (color) {
       case 'r':
-        return 'rgb(255, 0, 0)';
+        return `rgb(${this.maxColorLimit}, 0, 0)`;
       case 'g':
-        return 'rgb(0, 255, 0)';
+        return `rgb(0, ${this.maxColorLimit}, 0)`;
       case 'b':
-        return 'rgb(0, 0, 255)';
+        return `rgb(0, 0, ${this.maxColorLimit})`;
     }
   }
 
@@ -86,40 +185,30 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
       this.colorPosition = 0;
     }
 
-    // tint color select
-    this.colorSelect.setTint(this.getColorInteger());
-    // create drop emmiter
-    this.emitter = this.particles.createEmitter({
-      x: this.colorDropX,
-      y: this.colorDropY,
-      tint: this.getColorInteger(),
-      quantity: 5,
-      frequency: 25,
-      angle: { min: 86, max: 94 },
-      speed: 200,
-      gravityY: 200,
-      lifespan: { min: 1000, max: 2000 },
-    });
-    // disable drop emmiter
-    this.emitter.stop();
+    // tint color swatch fluid
+    this.colorSwatchFluid.setTint(this.getColorInteger());
+    // tint jet
+    this.jet.setTint(this.getColorInteger());
   }
 
   openFaucet() {
     this.isOpen = true;
 
-    this.colorHandwheel.setRotation(5);
+    this.handwheelStatus = 'opening';
 
-    this.emitter.start();
+    setTimeout(() => (this.handwheelStatus = 'opened'), 1000);
+
+    this.jetParticlesEmitter.start();
   }
 
   closeFaucet() {
     this.isOpen = false;
 
-    this.colorHandwheel.setRotation(0);
+    this.handwheelStatus = 'closing';
 
-    this.emitter.stop();
+    setTimeout(() => (this.handwheelStatus = 'closed'), 1000);
 
-    this.changeColor();
+    this.jetParticlesEmitter.stop();
   }
 }
 
