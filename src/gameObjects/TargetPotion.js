@@ -57,7 +57,7 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
         scene.add.text(500, 500, this.title, {
           fontFamily: 'PeaceSans',
           fontSize: 80,
-          color: '#ff0000',
+          color: '#000',
         });
       },
     });
