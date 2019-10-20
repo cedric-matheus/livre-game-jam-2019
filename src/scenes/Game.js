@@ -6,6 +6,7 @@ import Phaser from 'phaser';
 import { DEFAULT_WIDTH, DEFAULT_HEIGHT } from '../config';
 
 import { Potion, TargetPotion, ColorSystem } from '../gameObjects';
+import { colorCode, nameGen } from '../utils';
 
 class Game extends Phaser.Scene {
   constructor() {
@@ -64,11 +65,10 @@ class Game extends Phaser.Scene {
 
   create() {
     // add target potion
-    this.targetPotion = new TargetPotion(
-      this,
-      'Poção do Amor',
-      'rgb(220, 50, 50)'
-    );
+    const color = colorCode();
+    const name = nameGen();
+    console.log(name, color);
+    this.targetPotion = new TargetPotion(this, name, color);
 
     this.lightEffects = this.add.image(1895 / 2, 996 / 2, 'lightEffects');
     this.borderShadow = this.add.image(1920 / 2, 1080 / 2, 'borderShadow');
