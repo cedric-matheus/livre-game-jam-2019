@@ -80,6 +80,20 @@ class Game extends Phaser.Scene {
   }
 
   create() {
+    // music config
+    const musicConfig = { loop: true };
+    // liquid sound config
+    const liquidSoundConfig = { loop: true };
+    // add music
+    this.music = this.sound.add('music', musicConfig);
+    // FIXME: Play music
+    // play music
+    this.music.play();
+    // add liquid falling sound
+    this.liquidFallingSound = this.sound.add(
+      'liquidFalling',
+      liquidSoundConfig
+    );
     // add target potion
     const color = colorCode();
     const name = nameGen();
@@ -93,12 +107,15 @@ class Game extends Phaser.Scene {
   update() {
     if (this.colorSystem.handwheelStatus === 'opened') {
       this.potion.addColor(this.colorSystem.getColor());
+      if (!this.liquidFallingSound.isPlaying) this.liquidFallingSound.play();
     } else if (this.colorSystem.handwheelStatus === 'closing') {
       const handwheelNewAngle = (this.colorSystem.handwheel.angle -= this.handwheelRotationSpeed);
       this.colorSystem.handwheel.setAngle(handwheelNewAngle);
     } else if (this.colorSystem.handwheelStatus === 'opening') {
       const handwheelNewAngle = (this.colorSystem.handwheel.angle += this.handwheelRotationSpeed);
       this.colorSystem.handwheel.setAngle(handwheelNewAngle);
+    } else {
+      if (this.liquidFallingSound.isPlaying) this.liquidFallingSound.stop();
     }
   }
 }

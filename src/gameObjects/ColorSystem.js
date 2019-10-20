@@ -36,6 +36,11 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
     const stopperX = 450;
     const stopperY = 900;
 
+    // add toggle valve sound
+    this.toggleValveSound = scene.sound.add('toggleValve');
+    // add change color sound
+    this.changeColorSound = scene.sound.add('changeColor');
+
     this.colorPosition = 0;
     this.colors = ['r', 'g', 'b'];
     this.totalColors = this.colors.length;
@@ -177,8 +182,12 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
   toggleFaucet() {
     if (this.handwheelStatus === 'opened') {
       this.closeFaucet();
+      // play toggle valve sound
+      this.toggleValveSound.play();
     } else if (this.handwheelStatus === 'closed') {
       this.openFaucet();
+      // play toggle valve sound
+      this.toggleValveSound.play();
     }
   }
 
@@ -213,6 +222,9 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
     this.colorSwatchFluid.setTint(this.getColorInteger());
     // tint jet
     this.jet.setTint(this.getColorInteger());
+
+    // play change color sound
+    this.changeColorSound.play();
   }
 
   openFaucet() {

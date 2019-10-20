@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 
+// images
 import backgroundImg from '../assets/images/background.jpg';
 import tableImg from '../assets/images/table.png';
 import pipeImg from '../assets/images/pipe.png';
@@ -21,6 +22,12 @@ import helpImg from '../assets/images/help.png';
 import lightEffectsImg from '../assets/images/lightEffects.png';
 import borderShadowImg from '../assets/images/borderShadow.png';
 
+// audios
+import musicAud from '../assets/audios/music.mp3';
+import changeColorAud from '../assets/audios/changeColor.ogg';
+import toggleValveAud from '../assets/audios/toggleValve.ogg';
+import liquidFallingAud from '../assets/audios/liquidFalling.ogg';
+
 class Preload extends Phaser.Scene {
   constructor() {
     // set scene key
@@ -32,6 +39,7 @@ class Preload extends Phaser.Scene {
     this.logo = this.add.image(400, 300, 'logo');
 
     // load game assets
+    // images
     this.load.image('background', backgroundImg);
     this.load.image('table', tableImg);
     this.load.image('pipe', pipeImg);
@@ -52,6 +60,12 @@ class Preload extends Phaser.Scene {
     this.load.image('help', helpImg);
     this.load.image('lightEffects', lightEffectsImg);
     this.load.image('borderShadow', borderShadowImg);
+
+    // audios
+    this.load.audio('music', musicAud);
+    this.load.audio('changeColor', changeColorAud);
+    this.load.audio('toggleValve', toggleValveAud);
+    this.load.audio('liquidFalling', liquidFallingAud);
   }
 
   create() {
