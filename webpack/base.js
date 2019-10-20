@@ -24,6 +24,19 @@ module.exports = {
         use: 'file-loader',
       },
       {
+        test: /\.(gif|png|jpe?g|svg|xml|webmanifest|cur|json)$/i,
+        include: [path.resolve(__dirname, './public')],
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'public/',
+            },
+          },
+        ],
+      },
+      {
         test: /\.(woff(2)?|ttf|otf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
