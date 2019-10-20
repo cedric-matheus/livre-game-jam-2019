@@ -42,6 +42,8 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "phaser": "^3.16.2"
+    "lodash": "^4.17.15",
+    "phaser": "^3.16.2",
+    "randomcolor": "^0.5.4"
   }
 }

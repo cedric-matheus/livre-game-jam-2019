@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 // import WebFont from 'webfontloader';
 
 import { Potion, TargetPotion, ColorSystem } from '../gameObjects';
+import { generatePotion } from '../utils';
 
 class Game extends Phaser.Scene {
   constructor() {
@@ -36,6 +37,7 @@ class Game extends Phaser.Scene {
         this.colorSystem.closeFaucet();
       } else {
         this.colorSystem.openFaucet();
+        console.log(generatePotion());
       }
     });
     // FIXME: add target potion
