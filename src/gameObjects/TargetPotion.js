@@ -10,6 +10,9 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
     const plankX = 400;
     const plankY = 300;
 
+    // const plankX = 400;
+    // const plankY = 300;
+
     // const bottleWidth = 82;
     const bottleHeight = 180;
 

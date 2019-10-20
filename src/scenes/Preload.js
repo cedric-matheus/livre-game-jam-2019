@@ -3,9 +3,12 @@ import Phaser from 'phaser';
 import woodPlankImg from '../assets/images/woodPlank.png';
 import emptyBottleImg from '../assets/images/emptyBottle.png';
 import colorSelectImg from '../assets/images/colorSelect.png';
-import colorHandwheelImg from '../assets/images/colorHandwheel.png';
-import colorFaucetImg from '../assets/images/colorFaucet.png';
 import colorDropImg from '../assets/images/colorDrop.png';
+
+import backgroundImg from '../assets/images/background.jpg';
+import tableImg from '../assets/images/table.png';
+import pipeImg from '../assets/images/pipe.png';
+import handwheelImg from '../assets/images/handwheel.png';
 
 class Preload extends Phaser.Scene {
   constructor() {
@@ -21,9 +24,12 @@ class Preload extends Phaser.Scene {
     this.load.image('woodPlank', woodPlankImg);
     this.load.image('emptyBottle', emptyBottleImg);
     this.load.image('colorSelect', colorSelectImg);
-    this.load.image('colorHandwheel', colorHandwheelImg);
-    this.load.image('colorFaucet', colorFaucetImg);
     this.load.image('colorDrop', colorDropImg);
+
+    this.load.image('background', backgroundImg);
+    this.load.image('table', tableImg);
+    this.load.image('pipe', pipeImg);
+    this.load.image('handwheel', handwheelImg);
   }
 
   create() {

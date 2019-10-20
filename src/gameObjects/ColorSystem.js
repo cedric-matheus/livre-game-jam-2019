@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 
+import { DEFAULT_HEIGHT } from '../config';
+
 class ColorSystem extends Phaser.GameObjects.Sprite {
   constructor(scene) {
     super(scene);
@@ -9,20 +11,30 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
     this.totalColors = this.colors.length;
     this.isOpen = false;
 
+    const pipeHeight = 921;
+    const pipeWidth = 986;
+    const pipeX = pipeWidth / 2;
+    const pipeY = DEFAULT_HEIGHT * 0.48;
+
+    const handwheelWidth = 265;
+    const handwheelHeight = 265;
+    const handwheelX = pipeWidth * 0.56;
+    const handwheelY = DEFAULT_HEIGHT - pipeHeight * 0.98;
+
+    const colorDropX = pipeX + 100;
+    const colorDropY = pipeY - 35;
+
     const colorSelectX = 100;
-    const colorSelectY = 300;
-
-    const colorHandwheelX = 250;
-    const colorHandwheelY = 150;
-
-    const colorFaucetX = 600;
-    const colorFaucetY = 300;
-
-    const colorDropX = colorFaucetX + 100;
-    const colorDropY = colorFaucetY - 35;
+    const colorSelectY = 600;
 
     this.colorDropX = colorDropX;
     this.colorDropY = colorDropY;
+
+    // add pipe
+    this.pipe = scene.add.image(pipeX, pipeY, 'pipe');
+
+    // add handwheel
+    this.handwheel = scene.add.image(handwheelX, handwheelY, 'handwheel');
 
     // add color select
     this.colorSelect = scene.add.image(
@@ -32,18 +44,7 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
     );
     // tint color select
     this.colorSelect.setTint(this.getColorInteger());
-    // add color handwheel
-    this.colorHandwheel = scene.add.image(
-      colorHandwheelX,
-      colorHandwheelY,
-      'colorHandwheel'
-    );
-    // add color faucet
-    this.colorFaucet = scene.add.image(
-      colorFaucetX,
-      colorFaucetY,
-      'colorFaucet'
-    );
+
     // create drop particles
     this.particles = scene.add.particles('colorDrop');
     // create drop emmiter
