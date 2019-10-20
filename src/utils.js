@@ -97,11 +97,11 @@ const potionNames = [
   'Poção das Flores',
 ];
 
-const nameGen = () => {
+export const nameGen = () => {
   return _.capitalize(_.sample(potionNames));
 };
 
-const colorCode = () => {
+export const colorCode = () => {
   return randomcolor({
     format: 'rgb',
   });
