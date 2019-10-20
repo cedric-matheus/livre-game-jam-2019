@@ -35,6 +35,45 @@ class Game extends Phaser.Scene {
     this.isRestartable = false;
   }
 
+  getPercent(targetColor, potionColor) {
+    const targetRGBArray = targetColor
+      .replace('rgb(', '')
+      .replace(')', '')
+      .split(',');
+
+    const potionRGBArray = potionColor
+      .replace('rgb(', '')
+      .replace(')', '')
+      .split(',');
+
+    const rDiff = this.getPencertDifference(
+      targetRGBArray[0],
+      potionRGBArray[0]
+    );
+
+    const gDiff = this.getPencertDifference(
+      targetRGBArray[1],
+      potionRGBArray[1]
+    );
+
+    const bDiff = this.getPencertDifference(
+      targetRGBArray[2],
+      potionRGBArray[2]
+    );
+
+    const totalPercent = parseInt(Math.abs((rDiff + gDiff + bDiff) / 3));
+
+    return totalPercent;
+  }
+
+  getPencertDifference(v1, v2) {
+    const A = Math.abs(v1 - v2);
+    const B = (v1 + v2) / 2;
+    const C = A / B;
+
+    return C * 1000;
+  }
+
   init() {
     //  Inject our CSS
     var element = document.createElement('style');
@@ -90,9 +129,8 @@ class Game extends Phaser.Scene {
     const liquidSoundConfig = { loop: true };
     // add music
     this.music = this.sound.add('music', musicConfig);
-    // FIXME: Play music
     // play music
-    // this.music.play();
+    this.music.play();
     // add liquid falling sound
     this.liquidFallingSound = this.sound.add(
       'liquidFalling',
@@ -118,13 +156,17 @@ class Game extends Phaser.Scene {
     }
 
     if (this.isEnd) {
+      const percent = this.getPercent(
+        this.potion.color.getRGB(),
+        this.targetPotion.targetColor
+      );
       this.targetPotion.stopTimer();
 
       this.input.clear(this.colorSystem.handwheel);
       this.input.clear(this.colorSystem.colorSwatch);
       this.input.clear(this.colorSystem.stopper);
       this.input.clear(this.targetPotion.scroll);
-      if (!this.isRestartable) this.popUp.showPopUp(this.isLose, 100);
+      if (!this.isRestartable) this.popUp.showPopUp(this.isLose, percent);
       this.isRestartable = true;
     }
 
