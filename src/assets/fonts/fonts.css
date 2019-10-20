@@ -1,0 +1,13 @@
+@font-face {
+  font-family: KidsZone;
+  src: url('./KidsZone.otf');
+  font-weight: 400;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: PeaceSans;
+  src: url('./PeaceSans.otf');
+  font-weight: 400;
+  font-weight: normal;
+}

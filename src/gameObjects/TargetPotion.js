@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
-
-// TODO: load webfonts
+import WebFont from 'webfontloader';
 
 class TargetPotion extends Phaser.GameObjects.Sprite {
   constructor(scene, title = null, targetColor = null) {
@@ -49,13 +48,19 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
     // tint scroll color spot
     this.scrollColorSpot.setTint(this.getColorInteger());
 
-    // );
-    // // add title text
-    // scene.add.text(200, 100, this.title, {
-    //   fontFamily: 'Droid Serif',
-    //   fontSize: 64,
-    //   color: '#000',
-    // });
+    // add potion title
+    WebFont.load({
+      custom: {
+        families: ['KidsZone', 'PeaceSans'],
+      },
+      active: () => {
+        scene.add.text(500, 500, this.title, {
+          fontFamily: 'PeaceSans',
+          fontSize: 80,
+          color: '#ff0000',
+        });
+      },
+    });
 
     // add help
     this.help = scene.add.image(helpX, helpY, 'help');
