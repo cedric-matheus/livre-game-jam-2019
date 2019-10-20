@@ -42,12 +42,21 @@
         text-align: center;
       }
     </style>
+
     <script>
-      // Check that service workers are registered
       if ('serviceWorker' in navigator) {
-        // Use the window load event to keep the page load performant
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js');
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(
+            function(registration) {
+              console.log(
+                'ServiceWorker registration successful with scope: ',
+                registration.scope
+              );
+            },
+            function(err) {
+              console.log('ServiceWorker registration failed: ', err);
+            }
+          );
         });
       }
     </script>
