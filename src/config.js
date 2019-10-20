@@ -4,6 +4,8 @@ import scenes from './scenes';
 
 export const DEFAULT_WIDTH = 1920;
 export const DEFAULT_HEIGHT = 1080;
+export const MAX_COLOR_LIMIT = 220;
+export const MIN_COLOR_LIMIT = 50;
 // const MAX_WIDTH = 1536;
 // const MAX_HEIGHT = 864;
 // const SCALE_MODE = 'SMOOTH'; // FIT OR SMOOTH

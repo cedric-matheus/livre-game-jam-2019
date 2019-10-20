@@ -1,49 +1,52 @@
 import Phaser from 'phaser';
 
+import { MAX_COLOR_LIMIT, MIN_COLOR_LIMIT } from '../config';
+
 class Potion extends Phaser.GameObjects.Sprite {
   constructor(scene) {
     super(scene);
 
     this.color = {
-      r: 0,
-      g: 0,
-      b: 0,
+      r: MIN_COLOR_LIMIT,
+      g: MIN_COLOR_LIMIT,
+      b: MIN_COLOR_LIMIT,
       getRGB: () => `rgb(${this.color.r}, ${this.color.g}, ${this.color.b})`,
     };
 
-    const X = 400;
-    const Y = 300;
+    const X = 935;
+    const Y = 650;
 
-    // const bottleWidth = 82;
-    const bottleHeight = 180;
+    const bottleFluidBrightX = X;
+    const bottleFluidBrightY = Y + 250;
 
-    const addYBottle = 100;
+    const bottleBackX = X;
+    const bottleBackY = Y;
 
-    const maskWidth = 82;
-    const maskHeight = 110;
+    const bottleFluidX = bottleBackX;
+    const bottleFluidY = bottleBackY + 130;
 
-    // add potion bottle
-    this.potionBottle = scene.add.image(X, Y + addYBottle, 'emptyBottle');
-    // add potion fluid
-    this.potionFluid = scene.add.image(X, Y + addYBottle, 'emptyBottle');
-    // create mask
-    this.maskShape = scene.add.graphics();
-    // add color and fill style
-    this.maskShape.fillStyle('rgb(0, 0, 0)', 0);
-    // draw rect
-    this.maskShape.fillRect(
-      X - maskWidth / 2,
-      Y - (maskHeight / 2 - (bottleHeight - maskHeight) / 2) + addYBottle,
-      maskWidth,
-      maskHeight
+    this.bottleFrontX = bottleBackX;
+    this.bottleFrontY = bottleBackY;
+
+    // add bottle fluid bright
+    this.bottleFluidBright = scene.add.image(
+      bottleFluidBrightX,
+      bottleFluidBrightY,
+      'bottleFluidBright'
     );
-    // add mask to potion fluid
-    this.potionFluid.mask = new Phaser.Display.Masks.GeometryMask(
-      scene,
-      this.maskShape
+    // tint bottle fluid bright
+    this.bottleFluidBright.setTint(this.getColorInteger());
+
+    // add bottle back
+    this.bottleBack = scene.add.image(bottleBackX, bottleBackY, 'bottleBack');
+    // add bottle fluid
+    this.bottleFluid = scene.add.image(
+      bottleFluidX,
+      bottleFluidY,
+      'bottleFluid'
     );
-    // tint potion fluid
-    this.potionFluid.setTint(this.getColorInteger());
+    // tint bottle fluid
+    this.bottleFluid.setTint(this.getColorInteger());
   }
 
   getColorInteger() {
@@ -53,20 +56,20 @@ class Potion extends Phaser.GameObjects.Sprite {
   addColor(color) {
     switch (color) {
       case 'r':
-        this.color.r++;
+        if (this.color.r < MAX_COLOR_LIMIT) this.color.r++;
         break;
       case 'g':
-        this.color.g++;
+        if (this.color.g < MAX_COLOR_LIMIT) this.color.g++;
         break;
       case 'b':
-        this.color.b++;
+        if (this.color.b < MAX_COLOR_LIMIT) this.color.b++;
         break;
     }
 
-    console.log(this.color.getRGB());
-
-    // tint potion fluid
-    this.potionFluid.setTint(this.getColorInteger());
+    // tint bottle fluid bright
+    this.bottleFluidBright.setTint(this.getColorInteger());
+    // tint bottle fluid
+    this.bottleFluid.setTint(this.getColorInteger());
   }
 
   closeBottle() {

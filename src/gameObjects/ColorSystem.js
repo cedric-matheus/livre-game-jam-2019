@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import { DEFAULT_HEIGHT } from '../config';
+import { DEFAULT_HEIGHT, MAX_COLOR_LIMIT, MIN_COLOR_LIMIT } from '../config';
 
 class ColorSystem extends Phaser.GameObjects.Sprite {
   constructor(scene) {
@@ -36,8 +36,6 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
     this.colorPosition = 0;
     this.colors = ['r', 'g', 'b'];
     this.totalColors = this.colors.length;
-    this.maxColorLimit = 220;
-    this.minColorLimit = 50;
 
     /*
      * handwhell status
@@ -162,15 +160,19 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
     }
   }
 
+  getColor() {
+    return this.colors[this.colorPosition];
+  }
+
   getRGB() {
-    const color = this.colors[this.colorPosition];
+    const color = this.getColor();
     switch (color) {
       case 'r':
-        return `rgb(${this.maxColorLimit}, 0, 0)`;
+        return `rgb(${MAX_COLOR_LIMIT}, ${MIN_COLOR_LIMIT}, ${MIN_COLOR_LIMIT})`;
       case 'g':
-        return `rgb(0, ${this.maxColorLimit}, 0)`;
+        return `rgb(${MIN_COLOR_LIMIT}, ${MAX_COLOR_LIMIT}, ${MIN_COLOR_LIMIT})`;
       case 'b':
-        return `rgb(0, 0, ${this.maxColorLimit})`;
+        return `rgb(${MIN_COLOR_LIMIT}, ${MIN_COLOR_LIMIT}, ${MAX_COLOR_LIMIT})`;
     }
   }
 

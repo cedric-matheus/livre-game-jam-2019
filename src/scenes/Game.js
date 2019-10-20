@@ -40,20 +40,19 @@ class Game extends Phaser.Scene {
     //     families: ['Droid Sans', 'Droid Serif'],
     //   },
     // });
-    // FIXME: add potion
-    // add player potion
-    // this.potion = new Potion(this);
-    // FIXME: add color system
+    // add potion
+    this.potion = new Potion(this);
     // add color system
     this.colorSystem = new ColorSystem(this);
+    // add potion bottle front
+    this.potion.bottleFront = this.add.image(
+      this.potion.bottleFrontX,
+      this.potion.bottleFrontY,
+      'bottleFront'
+    );
   }
 
   create() {
-    // TODO: implement controls
-    // this.input.on('pointerdown', () => {
-    //   console.log('teste');
-    //   this.potion.addColor('r');
-    // });
     // FIXME: add target potion
     // add target potion
     // this.targetPotion = new TargetPotion(
@@ -65,7 +64,7 @@ class Game extends Phaser.Scene {
 
   update() {
     if (this.colorSystem.handwheelStatus === 'opened') {
-    } else if (this.colorSystem.handwheelStatus === 'closed') {
+      this.potion.addColor(this.colorSystem.getColor());
     } else if (this.colorSystem.handwheelStatus === 'closing') {
       const handwheelNewAngle = (this.colorSystem.handwheel.angle -= this.handwheelRotationSpeed);
       this.colorSystem.handwheel.setAngle(handwheelNewAngle);

@@ -13,8 +13,8 @@ import colorSwatchImg from '../assets/images/colorSwatch.png';
 import colorSwatchFluidImg from '../assets/images/colorSwatchFluid.png';
 import colorSwatchLenImg from '../assets/images/colorSwatchLen.png';
 import bottleBackImg from '../assets/images/bottleBack.png';
-import bottleFrontImg from '../assets/images/bottleFront.png';
 import bottleFluidImg from '../assets/images/bottleFluid.png';
+import bottleFrontImg from '../assets/images/bottleFront.png';
 import bottleFluidBrightImg from '../assets/images/bottleFluidBright.png';
 
 class Preload extends Phaser.Scene {
@@ -41,8 +41,8 @@ class Preload extends Phaser.Scene {
     this.load.image('colorSwatchFluid', colorSwatchFluidImg);
     this.load.image('colorSwatchLen', colorSwatchLenImg);
     this.load.image('bottleBack', bottleBackImg);
-    this.load.image('bottleFront', bottleFrontImg);
     this.load.image('bottleFluid', bottleFluidImg);
+    this.load.image('bottleFront', bottleFrontImg);
     this.load.image('bottleFluidBright', bottleFluidBrightImg);
   }
 
