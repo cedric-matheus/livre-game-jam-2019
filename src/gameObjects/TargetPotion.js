@@ -16,6 +16,17 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
     const helpX = 1594 / 2 + 310;
     const helpY = 790 / 2 + 50;
 
+    const titleTextX = 1490;
+    const titleTextY = 640;
+    const titleTextAngle = -12;
+    const titleTextFont = 42;
+
+    const timerTotal = 15;
+    const timerTextX = 1620;
+    const timerTextY = -20;
+    const timerTextFont = 150;
+
+    this.timer = timerTotal;
     this.title = title;
     this.targetColor = targetColor;
 
@@ -54,11 +65,29 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
         families: ['KidsZone', 'PeaceSans'],
       },
       active: () => {
-        scene.add.text(500, 500, this.title, {
-          fontFamily: 'PeaceSans',
-          fontSize: 80,
+        // create titleText
+        this.titleText = scene.add.text(titleTextX, titleTextY, this.title, {
+          fontFamily: 'KidsZone',
+          fontSize: titleTextFont,
           color: '#000',
+          align: 'center',
+          wordWrap: { width: 300, height: 500, useAdvancedWrap: true },
         });
+        // adjust title text
+        this.titleText.setOrigin(0.5, 0.5);
+        this.titleText.setAngle(titleTextAngle);
+        // create timer text
+        this.timerText = scene.add.text(
+          timerTextX,
+          timerTextY,
+          `${this.timer}`,
+          {
+            fontFamily: 'PeaceSans',
+            fontSize: timerTextFont,
+            color: '#eadbbd',
+            align: 'right',
+          }
+        );
       },
     });
 
