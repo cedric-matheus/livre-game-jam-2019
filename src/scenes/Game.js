@@ -143,7 +143,7 @@ class Game extends Phaser.Scene {
     this.targetPotion = new TargetPotion(this, name, color);
 
     // add pop up
-    this.popUp = new PopUp(this);
+    this.popUp = new PopUp(this, color);
 
     this.lightEffects = this.add.image(1895 / 2, 996 / 2, 'lightEffects');
     this.borderShadow = this.add.image(1920 / 2, 1080 / 2, 'borderShadow');
@@ -166,7 +166,9 @@ class Game extends Phaser.Scene {
       this.input.clear(this.colorSystem.colorSwatch);
       this.input.clear(this.colorSystem.stopper);
       this.input.clear(this.targetPotion.scroll);
-      if (!this.isRestartable) this.popUp.showPopUp(this.isLose, percent);
+      if (!this.isRestartable) {
+        this.popUp.showPopUp(this.isLose, this.potion.color.getRGB());
+      }
       this.isRestartable = true;
     }
 

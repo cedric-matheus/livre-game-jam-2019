@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import WebFont from 'webfontloader';
 
 class PopUp extends Phaser.GameObjects.Sprite {
-  constructor(scene) {
+  constructor(scene, targetColor) {
     super(scene);
 
     scene.input.addPointer(1);
@@ -21,20 +21,25 @@ class PopUp extends Phaser.GameObjects.Sprite {
     const loseTextY = popUpY - 50;
     const loseTextFont = 65;
 
-    const winTopTextString = 'SUA POÇÃO ESTÁ';
+    const winTopTextString = 'POÇÃO';
     const winTopTextX = popUpX;
     const winTopTextY = popUpY - 150;
     const winTopTextFont = 40;
 
-    const winPercentTextString = `${0}%`;
-    const winPercentTextX = winTopTextX;
-    const winPercentTextY = winTopTextY + 110;
-    const winPercentTextFont = 180;
+    const winRGBPotionTextString = '(1, 1, 1)';
+    const winRGBPotionTextX = winTopTextX;
+    const winRGBPotionTextY = winTopTextY + 70;
+    const winRGBPotionTextFont = 80;
 
-    const winBottomTextString = 'IGUAL A RECEITA';
-    const winBottomTextX = winPercentTextX;
-    const winBottomTextY = winPercentTextY + 110;
-    const winBottomTextFont = 55;
+    const winBottomTextString = 'RECEITA';
+    const winBottomTextX = winRGBPotionTextX;
+    const winBottomTextY = winRGBPotionTextY + 70;
+    const winBottomTextFont = 45;
+
+    const winRGBTargetTextString = `${targetColor.replace('rgb', '')}`;
+    const winRGBTargetTextX = winBottomTextX;
+    const winRGBTargetTextY = winBottomTextY + 70;
+    const winRGBTargetTextFont = 80;
 
     // add pop up background
     this.popUpBackground = scene.add.image(
@@ -105,21 +110,37 @@ class PopUp extends Phaser.GameObjects.Sprite {
         // adjust win top text
         this.winTopText.setOrigin(0.5, 0.5);
 
-        // create win percent text
-        this.winPercentText = scene.add.text(
-          winPercentTextX,
-          winPercentTextY,
-          winPercentTextString,
+        // create win RGBTarget text
+        this.winRGBTargetText = scene.add.text(
+          winRGBTargetTextX,
+          winRGBTargetTextY,
+          winRGBTargetTextString,
           {
             fontFamily: 'PeaceSans',
-            fontSize: winPercentTextFont,
+            fontSize: winRGBTargetTextFont,
             color: '#251505',
             align: 'center',
             wordWrap: { width: 665, useAdvancedWrap: true },
           }
         );
-        // adjust win percent text
-        this.winPercentText.setOrigin(0.5, 0.5);
+        // adjust win RGBTarget text
+        this.winRGBTargetText.setOrigin(0.5, 0.5);
+
+        // create win RGBPotion text
+        this.winRGBPotionText = scene.add.text(
+          winRGBPotionTextX,
+          winRGBPotionTextY,
+          winRGBPotionTextString,
+          {
+            fontFamily: 'PeaceSans',
+            fontSize: winRGBPotionTextFont,
+            color: '#251505',
+            align: 'center',
+            wordWrap: { width: 665, useAdvancedWrap: true },
+          }
+        );
+        // adjust win RGBPotion text
+        this.winRGBPotionText.setOrigin(0.5, 0.5);
 
         // create win bottom text
         this.winBottomText = scene.add.text(
@@ -139,7 +160,8 @@ class PopUp extends Phaser.GameObjects.Sprite {
 
         this.loseText.setVisible(false);
         this.winTopText.setVisible(false);
-        this.winPercentText.setVisible(false);
+        this.winRGBPotionText.setVisible(false);
+        this.winRGBTargetText.setVisible(false);
         this.winBottomText.setVisible(false);
       },
     });
@@ -147,7 +169,7 @@ class PopUp extends Phaser.GameObjects.Sprite {
     this.hidePopUp();
   }
 
-  showPopUp(isLose, percent = 0) {
+  showPopUp(isLose, potionRGB) {
     this.isShowed = true;
 
     this.popUpBackground.setVisible(true);
@@ -156,11 +178,12 @@ class PopUp extends Phaser.GameObjects.Sprite {
     if (isLose) {
       this.loseText.setVisible(true);
     } else {
-      const percentText = `${percent}%`;
-      this.winPercentText && this.winPercentText.setText(percentText);
+      const winPotionRGB = potionRGB.replace('rgb', '');
+      this.winRGBPotionText && this.winRGBPotionText.setText(winPotionRGB);
 
       this.winTopText.setVisible(true);
-      this.winPercentText.setVisible(true);
+      this.winRGBPotionText.setVisible(true);
+      this.winRGBTargetText.setVisible(true);
       this.winBottomText.setVisible(true);
     }
   }
