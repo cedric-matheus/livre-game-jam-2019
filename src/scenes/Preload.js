@@ -1,7 +1,5 @@
 import Phaser from 'phaser';
 
-import woodPlankImg from '../assets/images/woodPlank.png';
-
 import backgroundImg from '../assets/images/background.jpg';
 import tableImg from '../assets/images/table.png';
 import pipeImg from '../assets/images/pipe.png';
@@ -16,6 +14,12 @@ import bottleBackImg from '../assets/images/bottleBack.png';
 import bottleFluidImg from '../assets/images/bottleFluid.png';
 import bottleFrontImg from '../assets/images/bottleFront.png';
 import bottleFluidBrightImg from '../assets/images/bottleFluidBright.png';
+import stopperImg from '../assets/images/stopper.png';
+import scrollImg from '../assets/images/scroll.png';
+import scrollColorSpotImg from '../assets/images/scrollColorSpot.png';
+import helpImg from '../assets/images/help.png';
+import lightEffectsImg from '../assets/images/lightEffects.png';
+import borderShadowImg from '../assets/images/borderShadow.png';
 
 class Preload extends Phaser.Scene {
   constructor() {
@@ -28,8 +32,6 @@ class Preload extends Phaser.Scene {
     this.logo = this.add.image(400, 300, 'logo');
 
     // load game assets
-    this.load.image('woodPlank', woodPlankImg);
-
     this.load.image('background', backgroundImg);
     this.load.image('table', tableImg);
     this.load.image('pipe', pipeImg);
@@ -44,6 +46,12 @@ class Preload extends Phaser.Scene {
     this.load.image('bottleFluid', bottleFluidImg);
     this.load.image('bottleFront', bottleFrontImg);
     this.load.image('bottleFluidBright', bottleFluidBrightImg);
+    this.load.image('stopper', stopperImg);
+    this.load.image('scroll', scrollImg);
+    this.load.image('scrollColorSpot', scrollColorSpotImg);
+    this.load.image('help', helpImg);
+    this.load.image('lightEffects', lightEffectsImg);
+    this.load.image('borderShadow', borderShadowImg);
   }
 
   create() {

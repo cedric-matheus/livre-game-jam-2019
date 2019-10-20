@@ -33,6 +33,9 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
     const colorSwatchLenX = colorSwatchFluidX;
     const colorSwatchLenY = colorSwatchFluidY + 19;
 
+    const stopperX = 450;
+    const stopperY = 900;
+
     this.colorPosition = 0;
     this.colors = ['r', 'g', 'b'];
     this.totalColors = this.colors.length;
@@ -150,6 +153,25 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
       colorSwatchLenY,
       'colorSwatchLen'
     );
+
+    // add stopper
+    this.stopper = scene.add.image(stopperX, stopperY, 'stopper');
+    // create stopper hit area
+    const stopperFrame = this.stopper.frame;
+    const stopperHitArea = new Phaser.Geom.Rectangle(
+      stopperFrame.x,
+      stopperFrame.y,
+      stopperFrame.width,
+      stopperFrame.height
+    );
+    this.stopper.setInteractive(stopperHitArea, Phaser.Geom.Rectangle.Contains);
+    // add handle events to stopper
+    this.stopper.on('pointerdown', () => this.closeBottle());
+    this.stopper.on('pointerover', (pointer) => {
+      if (pointer.isDown) {
+        this.closeBottle();
+      }
+    });
   }
 
   toggleFaucet() {
@@ -211,6 +233,10 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
     setTimeout(() => (this.handwheelStatus = 'closed'), 1000);
 
     this.jetParticlesEmitter.stop();
+  }
+
+  closeBottle() {
+    return console.log('closeBottle');
   }
 }
 

@@ -16,9 +16,6 @@ class Potion extends Phaser.GameObjects.Sprite {
     const X = 935;
     const Y = 650;
 
-    const bottleFluidBrightX = X;
-    const bottleFluidBrightY = Y + 250;
-
     const bottleBackX = X;
     const bottleBackY = Y;
 
@@ -28,14 +25,8 @@ class Potion extends Phaser.GameObjects.Sprite {
     this.bottleFrontX = bottleBackX;
     this.bottleFrontY = bottleBackY;
 
-    // add bottle fluid bright
-    this.bottleFluidBright = scene.add.image(
-      bottleFluidBrightX,
-      bottleFluidBrightY,
-      'bottleFluidBright'
-    );
-    // tint bottle fluid bright
-    this.bottleFluidBright.setTint(this.getColorInteger());
+    this.bottleFluidBrightX = 925;
+    this.bottleFluidBrightY = 925;
 
     // add bottle back
     this.bottleBack = scene.add.image(bottleBackX, bottleBackY, 'bottleBack');
@@ -70,10 +61,6 @@ class Potion extends Phaser.GameObjects.Sprite {
     this.bottleFluidBright.setTint(this.getColorInteger());
     // tint bottle fluid
     this.bottleFluid.setTint(this.getColorInteger());
-  }
-
-  closeBottle() {
-    return false;
   }
 }
 

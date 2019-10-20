@@ -1,3 +1,5 @@
+// TODO: Add win screen
+
 import Phaser from 'phaser';
 // TODO: load webfonts
 // import WebFont from 'webfontloader';
@@ -50,16 +52,26 @@ class Game extends Phaser.Scene {
       this.potion.bottleFrontY,
       'bottleFront'
     );
+    // add bottle fluid bright
+    this.potion.bottleFluidBright = this.add.image(
+      this.potion.bottleFluidBrightX,
+      this.potion.bottleFluidBrightY,
+      'bottleFluidBright'
+    );
+    // tint bottle fluid bright
+    this.potion.bottleFluidBright.setTint(this.potion.getColorInteger());
   }
 
   create() {
-    // FIXME: add target potion
     // add target potion
-    // this.targetPotion = new TargetPotion(
-    //   this,
-    //   'Poção do Amor',
-    //   'rgb(255, 0, 0)'
-    // );
+    this.targetPotion = new TargetPotion(
+      this,
+      'Poção do Amor',
+      'rgb(220, 50, 50)'
+    );
+
+    this.lightEffects = this.add.image(1895 / 2, 996 / 2, 'lightEffects');
+    this.borderShadow = this.add.image(1920 / 2, 1080 / 2, 'borderShadow');
   }
 
   update() {
