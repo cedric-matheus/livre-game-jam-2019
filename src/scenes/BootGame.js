@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 
+import Game from './Game';
+
 import logoImg from '../assets/images/logo.png';
 
 // configure game and load loading asset
@@ -15,6 +17,10 @@ class BootGame extends Phaser.Scene {
   }
 
   create() {
+    // destroy scene
+    this.scene.remove('Game');
+    // create scene
+    this.scene.add('Game', Game);
     // start preload scene
     this.scene.start('Game');
   }
