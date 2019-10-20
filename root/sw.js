@@ -57,6 +57,7 @@ function fromCache(request) {
   return caches.open(CACHE).then(function(cache) {
     return cache.match(request).then(function(matching) {
       if (!matching || matching.status === 404) {
+        // eslint-disable-next-line prefer-promise-reject-errors
         return Promise.reject('no-match');
       }
 
