@@ -1,6 +1,3 @@
-// TODO: Add win to popUpGameObject
-// TODO: Add lose to popUpGameObject
-// TODO: Add game logic
 // TODO: Add start screen
 // TODO: Add logo screen
 // TODO: change loading screen
@@ -34,7 +31,8 @@ class Game extends Phaser.Scene {
     this.handwheelRotationSpeed = 4;
 
     this.isEnd = false;
-    this.isLose = true;
+    this.isLose = false;
+    this.isRestartable = false;
   }
 
   init() {
@@ -106,15 +104,30 @@ class Game extends Phaser.Scene {
     console.log(name, color);
     this.targetPotion = new TargetPotion(this, name, color);
 
-    // FIXME: display popup
     // add pop up
-    // this.popUp = new PopUp(this);
+    this.popUp = new PopUp(this);
 
     this.lightEffects = this.add.image(1895 / 2, 996 / 2, 'lightEffects');
     this.borderShadow = this.add.image(1920 / 2, 1080 / 2, 'borderShadow');
   }
 
   update() {
+    if (this.targetPotion.timer <= 0) {
+      this.isEnd = true;
+      this.isLose = true;
+    }
+
+    if (this.isEnd) {
+      this.targetPotion.stopTimer();
+
+      this.input.clear(this.colorSystem.handwheel);
+      this.input.clear(this.colorSystem.colorSwatch);
+      this.input.clear(this.colorSystem.stopper);
+      this.input.clear(this.targetPotion.scroll);
+      if (!this.isRestartable) this.popUp.showPopUp(this.isLose, 100);
+      this.isRestartable = true;
+    }
+
     if (this.colorSystem.handwheelStatus === 'opened') {
       this.potion.addColor(this.colorSystem.getColor());
       if (!this.liquidFallingSound.isPlaying) this.liquidFallingSound.play();

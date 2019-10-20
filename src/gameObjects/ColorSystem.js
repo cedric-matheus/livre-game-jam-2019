@@ -36,6 +36,9 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
     const stopperX = 450;
     const stopperY = 900;
 
+    const closedStopperX = 940;
+    const closedStopperY = 370;
+
     // add toggle valve sound
     this.toggleValveSound = scene.sound.add('toggleValve');
     // add change color sound
@@ -177,6 +180,15 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
         this.closeBottle();
       }
     });
+
+    // add closed stopper
+    this.closedStopper = scene.add.image(
+      closedStopperX,
+      closedStopperY,
+      'closedStopper'
+    );
+    // hide closed stopper
+    this.closedStopper.setVisible(false);
   }
 
   toggleFaucet() {
@@ -248,7 +260,9 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
   }
 
   closeBottle() {
-    return console.log('closeBottle');
+    this.scene.isEnd = true;
+    this.stopper.setVisible(false);
+    this.closedStopper.setVisible(true);
   }
 }
 

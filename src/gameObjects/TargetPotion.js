@@ -95,6 +95,9 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
     this.help = scene.add.image(helpX, helpY, 'help');
     // hidden help
     this.toggleHelp();
+
+    // start timer
+    this.startTimer();
   }
 
   toggleHelp() {
@@ -108,6 +111,17 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
   // TODO: return rgb array
   getRGBArray() {
     return false;
+  }
+
+  startTimer() {
+    this.timeInterval = setInterval(() => {
+      this.timer--;
+      this.timerText.setText(this.timer);
+    }, 1000);
+  }
+
+  stopTimer() {
+    clearInterval(this.timeInterval);
   }
 }
 

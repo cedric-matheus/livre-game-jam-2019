@@ -21,7 +21,7 @@ import scrollColorSpotImg from '../assets/images/scrollColorSpot.png';
 import helpImg from '../assets/images/help.png';
 import lightEffectsImg from '../assets/images/lightEffects.png';
 import borderShadowImg from '../assets/images/borderShadow.png';
-import closeStopperImg from '../assets/images/closeStopper.png';
+import closedStopperImg from '../assets/images/closedStopper.png';
 import playAgainButtonImg from '../assets/images/playAgainButton.jpg';
 import popUpImg from '../assets/images/popUp.jpg';
 import popUpBackgroundImg from '../assets/images/popUpBackground.png';
@@ -65,7 +65,7 @@ class Preload extends Phaser.Scene {
     this.load.image('lightEffects', lightEffectsImg);
     this.load.image('borderShadow', borderShadowImg);
 
-    this.load.image('closeStopper', closeStopperImg);
+    this.load.image('closedStopper', closedStopperImg);
     this.load.image('playAgainButton', playAgainButtonImg);
     this.load.image('popUp', popUpImg);
     this.load.image('popUpBackground', popUpBackgroundImg);
