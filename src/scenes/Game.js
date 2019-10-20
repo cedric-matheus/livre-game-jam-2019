@@ -1,7 +1,10 @@
-// TODO: Add win screen
+// TODO: Add win to popUpGameObject
+// TODO: Add lose to popUpGameObject
 // TODO: Add game logic
-// TODO: Add sounds
-// TODO: Add music
+// TODO: Add start screen
+// TODO: Add logo screen
+// TODO: change loading screen
+// TODO: Add sound of book and new valve
 
 import '../assets/scss/fonts.scss';
 
@@ -9,7 +12,7 @@ import Phaser from 'phaser';
 
 import { DEFAULT_WIDTH, DEFAULT_HEIGHT } from '../config';
 
-import { Potion, TargetPotion, ColorSystem } from '../gameObjects';
+import { Potion, TargetPotion, ColorSystem, PopUp } from '../gameObjects';
 import { colorCode, nameGen } from '../utils';
 
 class Game extends Phaser.Scene {
@@ -29,6 +32,9 @@ class Game extends Phaser.Scene {
     this.tableY = DEFAULT_HEIGHT - this.tableHeight / 2;
 
     this.handwheelRotationSpeed = 4;
+
+    this.isEnd = false;
+    this.isLose = true;
   }
 
   init() {
@@ -88,7 +94,7 @@ class Game extends Phaser.Scene {
     this.music = this.sound.add('music', musicConfig);
     // FIXME: Play music
     // play music
-    this.music.play();
+    // this.music.play();
     // add liquid falling sound
     this.liquidFallingSound = this.sound.add(
       'liquidFalling',
@@ -99,6 +105,10 @@ class Game extends Phaser.Scene {
     const name = nameGen();
     console.log(name, color);
     this.targetPotion = new TargetPotion(this, name, color);
+
+    // FIXME: display popup
+    // add pop up
+    // this.popUp = new PopUp(this);
 
     this.lightEffects = this.add.image(1895 / 2, 996 / 2, 'lightEffects');
     this.borderShadow = this.add.image(1920 / 2, 1080 / 2, 'borderShadow');

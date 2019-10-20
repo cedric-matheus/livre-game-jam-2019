@@ -59,7 +59,7 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
     // tint scroll color spot
     this.scrollColorSpot.setTint(this.getColorInteger());
 
-    // add potion title
+    // add potion title and timer
     WebFont.load({
       custom: {
         families: ['KidsZone', 'PeaceSans'],
@@ -69,7 +69,7 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
         this.titleText = scene.add.text(titleTextX, titleTextY, this.title, {
           fontFamily: 'KidsZone',
           fontSize: titleTextFont,
-          color: '#000',
+          color: '#251505',
           align: 'center',
           wordWrap: { width: 300, height: 500, useAdvancedWrap: true },
         });
