@@ -100,7 +100,7 @@ const potionNames = [
 ];
 
 export const nameGen = () => {
-  return _.capitalize(_.sample(potionNames));
+  return _.sample(potionNames).toUpperCase();
 };
 
 const getRandomInt = (min = MIN_COLOR_LIMIT, max = MAX_COLOR_LIMIT) => {

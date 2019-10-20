@@ -3,7 +3,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const { InjectManifest } = require('workbox-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -68,8 +67,5 @@ module.exports = {
       { from: './public', to: './public' },
       { from: './root', to: './' },
     ]),
-    new InjectManifest({
-      swSrc: path.resolve(__dirname, './root/sw.js'),
-    }),
   ],
 };
