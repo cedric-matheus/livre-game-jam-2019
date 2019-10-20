@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -22,19 +23,6 @@ module.exports = {
       {
         test: /\.(gif|png|jpe?g|svg|xml)$/i,
         use: 'file-loader',
-      },
-      {
-        test: /\.(gif|png|jpe?g|svg|xml|webmanifest|cur|json)$/i,
-        include: [path.resolve(__dirname, './public')],
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'public/',
-            },
-          },
-        ],
       },
       {
         test: /\.(woff(2)?|ttf|otf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -72,5 +60,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './index.html',
     }),
+    // Add your plugin
+    new CopyWebpackPlugin([
+      // Copy directory contents to {output}/to/directory/
+      //{ from: 'from/directory', to: 'to/directory' },
+      { from: './public', to: './public' },
+      { from: './root', to: './' },
+    ]),
   ],
 };
