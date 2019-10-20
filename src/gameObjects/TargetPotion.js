@@ -21,7 +21,7 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
     const titleTextAngle = -12;
     const titleTextFont = 42;
 
-    const timerTotal = 15;
+    const timerTotal = 45;
     const timerTextX = 1620;
     const timerTextY = -20;
     const timerTextFont = 150;
