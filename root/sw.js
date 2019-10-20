@@ -2,7 +2,7 @@ var cacheName = 'phaser-v3';
 var filesToCache = [
   '/',
   '/index.html',
-  '/public/favicon.ico',
+  '/favicon.ico',
   '/public/cursor.cur',
   '/public',
 ];
