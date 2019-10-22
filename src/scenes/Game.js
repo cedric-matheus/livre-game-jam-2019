@@ -10,7 +10,7 @@ import Phaser from 'phaser';
 import { DEFAULT_WIDTH, DEFAULT_HEIGHT } from '../config';
 
 import { Potion, TargetPotion, ColorSystem, PopUp } from '../gameObjects';
-import { colorCode, nameGen } from '../utils';
+import { colorCode, nameGen, deltaE } from '../utils';
 
 class Game extends Phaser.Scene {
   constructor() {
@@ -46,24 +46,28 @@ class Game extends Phaser.Scene {
       .replace(')', '')
       .split(',');
 
-    const rDiff = this.getPencertDifference(
-      targetRGBArray[0],
-      potionRGBArray[0]
-    );
+    // console.log(deltaE(potionRGBArray, targetRGBArray));
+    // Essa função retorna a porcentagem de semelhança
+    return deltaE(potionRGBArray, targetRGBArray);
 
-    const gDiff = this.getPencertDifference(
-      targetRGBArray[1],
-      potionRGBArray[1]
-    );
+    // const rDiff = this.getPencertDifference(
+    //   targetRGBArray[0],
+    //   potionRGBArray[0]
+    // );
 
-    const bDiff = this.getPencertDifference(
-      targetRGBArray[2],
-      potionRGBArray[2]
-    );
+    // const gDiff = this.getPencertDifference(
+    //   targetRGBArray[1],
+    //   potionRGBArray[1]
+    // );
 
-    const totalPercent = parseInt(Math.abs((rDiff + gDiff + bDiff) / 3));
+    // const bDiff = this.getPencertDifference(
+    //   targetRGBArray[2],
+    //   potionRGBArray[2]
+    // );
 
-    return totalPercent;
+    // const totalPercent = parseInt(Math.abs((rDiff + gDiff + bDiff) / 3));
+
+    // return totalPercent;
   }
 
   getPencertDifference(v1, v2) {
