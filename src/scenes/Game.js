@@ -46,7 +46,7 @@ class Game extends Phaser.Scene {
       .replace(')', '')
       .split(',');
 
-    // console.log(deltaE(potionRGBArray, targetRGBArray));
+    console.log('ELIXIR', potionRGBArray, 'RECIPE', targetRGBArray);
     // Essa função retorna a porcentagem de semelhança
     return deltaE(potionRGBArray, targetRGBArray);
 
@@ -164,6 +164,7 @@ class Game extends Phaser.Scene {
         this.potion.color.getRGB(),
         this.targetPotion.targetColor
       );
+      console.log(percent.toFixed(2));
       this.targetPotion.stopTimer();
 
       this.input.clear(this.colorSystem.handwheel);
@@ -171,7 +172,7 @@ class Game extends Phaser.Scene {
       this.input.clear(this.colorSystem.stopper);
       this.input.clear(this.targetPotion.scroll);
       if (!this.isRestartable) {
-        this.popUp.showPopUp(this.isLose, this.potion.color.getRGB());
+        this.popUp.showPopUp(this.isLose, percent.toFixed(2));
       }
       this.isRestartable = true;
     }

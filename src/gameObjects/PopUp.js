@@ -21,20 +21,20 @@ class PopUp extends Phaser.GameObjects.Sprite {
     const loseTextY = popUpY - 50;
     const loseTextFont = 65;
 
-    const winTopTextString = 'POÇÃO';
+    const winTopTextString = 'SEU ELIXIR ESTÁ';
     const winTopTextX = popUpX;
-    const winTopTextY = popUpY - 150;
-    const winTopTextFont = 40;
+    const winTopTextY = popUpY - 160;
+    const winTopTextFont = 35;
 
     const winRGBPotionTextString = '(1, 1, 1)';
     const winRGBPotionTextX = winTopTextX;
-    const winRGBPotionTextY = winTopTextY + 70;
-    const winRGBPotionTextFont = 80;
+    const winRGBPotionTextY = winTopTextY + 110;
+    const winRGBPotionTextFont = 160;
 
-    const winBottomTextString = 'RECEITA';
+    const winBottomTextString = 'IGUAL A RECEITA';
     const winBottomTextX = winRGBPotionTextX;
-    const winBottomTextY = winRGBPotionTextY + 70;
-    const winBottomTextFont = 45;
+    const winBottomTextY = winRGBPotionTextY + 110;
+    const winBottomTextFont = 55;
 
     const winRGBTargetTextString = `${targetColor.replace('rgb', '')}`;
     const winRGBTargetTextX = winBottomTextX;
@@ -178,12 +178,13 @@ class PopUp extends Phaser.GameObjects.Sprite {
     if (isLose) {
       this.loseText.setVisible(true);
     } else {
-      const winPotionRGB = potionRGB.replace('rgb', '');
+      // const winPotionRGB = potionRGB.replace('rgb', '');
+      const winPotionRGB = potionRGB + '%';
       this.winRGBPotionText && this.winRGBPotionText.setText(winPotionRGB);
 
       this.winTopText.setVisible(true);
       this.winRGBPotionText.setVisible(true);
-      this.winRGBTargetText.setVisible(true);
+      // this.winRGBTargetText.setVisible(true);
       this.winBottomText.setVisible(true);
     }
   }
