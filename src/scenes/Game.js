@@ -10,7 +10,7 @@ import Phaser from 'phaser';
 import { DEFAULT_WIDTH, DEFAULT_HEIGHT } from '../config';
 
 import { Potion, TargetPotion, ColorSystem, PopUp } from '../gameObjects';
-import { colorCode, nameGen, deltaE } from '../utils';
+import { colorCode, nameGen, deltaE, CIE2000 } from '../utils';
 
 class Game extends Phaser.Scene {
   constructor() {
@@ -46,9 +46,9 @@ class Game extends Phaser.Scene {
       .replace(')', '')
       .split(',');
 
-    console.log('ELIXIR', potionRGBArray, 'RECIPE', targetRGBArray);
+    // console.log('ELIXIR', potionRGBArray, 'RECIPE', targetRGBArray);
     // Essa função retorna a porcentagem de semelhança
-    return deltaE(potionRGBArray, targetRGBArray);
+    return (100 - CIE2000(potionColor, targetColor)).toFixed(1);
 
     // const rDiff = this.getPencertDifference(
     //   targetRGBArray[0],
@@ -127,14 +127,17 @@ class Game extends Phaser.Scene {
   }
 
   create() {
+    this.sound.pauseAll();
     // music config
-    const musicConfig = { loop: true };
+    const musicConfig = { loop: true, volume: 0.2 };
     // liquid sound config
     const liquidSoundConfig = { loop: true };
     // add music
     this.music = this.sound.add('music', musicConfig);
+
     // play music
     this.music.play();
+
     // add liquid falling sound
     this.liquidFallingSound = this.sound.add(
       'liquidFalling',
@@ -143,7 +146,7 @@ class Game extends Phaser.Scene {
     // add target potion
     const color = colorCode();
     const name = nameGen();
-    console.log(name, color);
+    // console.log(name, color);
     this.targetPotion = new TargetPotion(this, name, color);
 
     // add pop up
@@ -164,7 +167,7 @@ class Game extends Phaser.Scene {
         this.potion.color.getRGB(),
         this.targetPotion.targetColor
       );
-      console.log(percent.toFixed(2));
+      // console.log(percent);
       this.targetPotion.stopTimer();
 
       this.input.clear(this.colorSystem.handwheel);
@@ -172,7 +175,7 @@ class Game extends Phaser.Scene {
       this.input.clear(this.colorSystem.stopper);
       this.input.clear(this.targetPotion.scroll);
       if (!this.isRestartable) {
-        this.popUp.showPopUp(this.isLose, percent.toFixed(2));
+        this.popUp.showPopUp(this.isLose, percent);
       }
       this.isRestartable = true;
     }

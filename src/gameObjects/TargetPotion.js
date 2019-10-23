@@ -30,6 +30,9 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
     this.title = title;
     this.targetColor = targetColor;
 
+    // Add scroll sound
+    this.toggleHelpSound = scene.sound.add('book');
+
     // add scroll
     this.scroll = scene.add.image(scrollX, scrollY, 'scroll');
     // create scroll hit area
@@ -93,8 +96,9 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
 
     // add help
     this.help = scene.add.image(helpX, helpY, 'help');
+    this.help.setVisible(false);
     // hidden help
-    this.toggleHelp();
+    // this.toggleHelp();
 
     // start timer
     this.startTimer();
@@ -102,6 +106,7 @@ class TargetPotion extends Phaser.GameObjects.Sprite {
 
   toggleHelp() {
     this.help.setVisible(!this.help.visible);
+    this.toggleHelpSound.play();
   }
 
   getColorInteger() {

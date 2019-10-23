@@ -30,6 +30,8 @@ import popUpBackgroundImg from '../assets/images/popUpBackground.png';
 import musicAud from '../assets/audios/music.mp3';
 import changeColorAud from '../assets/audios/changeColor.ogg';
 import toggleValveAud from '../assets/audios/toggleValve.ogg';
+import bookAud from '../assets/audios/book.ogg';
+import corkAud from '../assets/audios/cork.ogg';
 import liquidFallingAud from '../assets/audios/liquidFalling.ogg';
 
 class Preload extends Phaser.Scene {
@@ -74,6 +76,8 @@ class Preload extends Phaser.Scene {
     this.load.audio('music', musicAud);
     this.load.audio('changeColor', changeColorAud);
     this.load.audio('toggleValve', toggleValveAud);
+    this.load.audio('book', bookAud);
+    this.load.audio('cork', corkAud);
     this.load.audio('liquidFalling', liquidFallingAud);
   }
 

@@ -14,7 +14,7 @@ self.addEventListener('install', function(event) {
     caches
       .open(cacheName)
       .then(function(cache) {
-        console.log('sw caching files');
+        // console.log('sw caching files');
         return cache.addAll(filesToCache);
       })
       .catch(function(err) {
@@ -24,8 +24,8 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', (event) => {
-  console.log('sw fetch');
-  console.log(event.request.url);
+  // console.log('sw fetch');
+  // console.log(event.request.url);
   event.respondWith(
     caches
       .match(event.request)
@@ -39,13 +39,13 @@ self.addEventListener('fetch', (event) => {
 });
 
 self.addEventListener('activate', function(event) {
-  console.log('sw activate');
+  // console.log('sw activate');
   event.waitUntil(
     caches.keys().then(function(keyList) {
       return Promise.all(
         keyList.map(function(key) {
           if (key !== cacheName) {
-            console.log('sw removing old cache', key);
+            // console.log('sw removing old cache', key);
             return caches.delete(key);
           }
         })

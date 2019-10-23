@@ -1,5 +1,8 @@
 /* eslint-disable camelcase */
 import _ from 'lodash';
+import Color from 'color';
+import randomColor from 'randomcolor';
+import MathColor from './MathColor.js';
 
 import { MAX_COLOR_LIMIT, MIN_COLOR_LIMIT } from './config';
 
@@ -114,6 +117,13 @@ export const colorCode = () => {
   return `rgb(${getRandomInt()},${getRandomInt()},${getRandomInt()})`;
 };
 
+export const getRandom = () => {
+  return randomColor({
+    hue: 'random',
+    format: 'cmyk',
+  });
+};
+
 const rgb2lab = (rgb) => {
   let r = rgb[0] / 255;
   let g = rgb[1] / 255;
@@ -140,24 +150,43 @@ const rgb2lab = (rgb) => {
 // calculate the perceptual distance between colors in CIELAB
 // https://github.com/THEjoezack/ColorMine/blob/master/ColorMine/ColorSpaces/Comparisons/Cie94Comparison.cs
 
-export const deltaE = (rgb1, rgb2) => {
-  const labA = rgb2lab(rgb1);
-  const labB = rgb2lab(rgb2);
+// export const deltaE = (rgb1, rgb2) => {
+//   const labA = rgb2lab(rgb1);
+//   const labB = rgb2lab(rgb2);
 
-  const deltaL = labA[0] - labB[0];
-  const deltaA = labA[1] - labB[1];
-  const deltaB = labA[2] - labB[2];
-  const c1 = Math.sqrt(labA[1] * labA[1] + labA[2] * labA[2]);
-  const c2 = Math.sqrt(labB[1] * labB[1] + labB[2] * labB[2]);
-  const deltaC = c1 - c2;
-  let deltaH = deltaA * deltaA + deltaB * deltaB - deltaC * deltaC;
-  deltaH = deltaH < 0 ? 0 : Math.sqrt(deltaH);
-  const sc = 1.0 + 0.045 * c1;
-  const sh = 1.0 + 0.015 * c1;
-  const deltaLKlsl = deltaL / 1.0;
-  const deltaCkcsc = deltaC / sc;
-  const deltaHkhsh = deltaH / sh;
-  const i =
-    deltaLKlsl * deltaLKlsl + deltaCkcsc * deltaCkcsc + deltaHkhsh * deltaHkhsh;
-  return i < 0 ? 0 : 100 - Math.sqrt(i);
+//   const deltaL = labA[0] - labB[0];
+//   const deltaA = labA[1] - labB[1];
+//   const deltaB = labA[2] - labB[2];
+//   const c1 = Math.sqrt(labA[1] * labA[1] + labA[2] * labA[2]);
+//   const c2 = Math.sqrt(labB[1] * labB[1] + labB[2] * labB[2]);
+//   const deltaC = c1 - c2;
+//   let deltaH = deltaA * deltaA + deltaB * deltaB - deltaC * deltaC;
+//   deltaH = deltaH < 0 ? 0 : Math.sqrt(deltaH);
+//   const sc = 1.0 + 0.045 * c1;
+//   const sh = 1.0 + 0.015 * c1;
+//   const deltaLKlsl = deltaL / 1.0;
+//   const deltaCkcsc = deltaC / sc;
+//   const deltaHkhsh = deltaH / sh;
+//   const i =
+//     deltaLKlsl * deltaLKlsl + deltaCkcsc * deltaCkcsc + deltaHkhsh * deltaHkhsh;
+//   return i < 0 ? 0 : 100 - Math.sqrt(i);
+// };
+
+export const CIE2000 = (rgb1, rgb2) => {
+  const potion = Color(rgb1)
+    .lab()
+    .object();
+  const target = Color(rgb2)
+    .lab()
+    .object();
+
+  // console.log(rgb1, rgb2, potion, target);
+  return MathColor.DeltaE00(
+    potion.l,
+    potion.a,
+    potion.b,
+    target.l,
+    target.a,
+    target.b
+  );
 };

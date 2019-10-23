@@ -43,6 +43,8 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
     this.toggleValveSound = scene.sound.add('toggleValve');
     // add change color sound
     this.changeColorSound = scene.sound.add('changeColor');
+    // add cork sound close bottle
+    this.closeBottleSound = scene.sound.add('cork');
 
     this.colorPosition = 0;
     this.colors = ['r', 'g', 'b'];
@@ -260,6 +262,7 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
   }
 
   closeBottle() {
+    this.closeBottleSound.play();
     this.scene.isEnd = true;
     this.stopper.setVisible(false);
     this.closedStopper.setVisible(true);
