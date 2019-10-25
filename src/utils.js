@@ -180,7 +180,6 @@ export const CIE2000 = (rgb1, rgb2) => {
     .lab()
     .object();
 
-  // console.log(rgb1, rgb2, potion, target);
   return MathColor.DeltaE00(
     potion.l,
     potion.a,

@@ -7,9 +7,9 @@ class Potion extends Phaser.GameObjects.Sprite {
     super(scene);
 
     this.color = {
-      r: MIN_COLOR_LIMIT,
-      g: MIN_COLOR_LIMIT,
-      b: MIN_COLOR_LIMIT,
+      r: MAX_COLOR_LIMIT,
+      g: MAX_COLOR_LIMIT,
+      b: MAX_COLOR_LIMIT,
       getRGB: () => `rgb(${this.color.r}, ${this.color.g}, ${this.color.b})`,
     };
 
@@ -47,13 +47,13 @@ class Potion extends Phaser.GameObjects.Sprite {
   addColor(color) {
     switch (color) {
       case 'r':
-        if (this.color.r < MAX_COLOR_LIMIT) this.color.r++;
+        if (this.color.r > MIN_COLOR_LIMIT) this.color.r--;
         break;
       case 'g':
-        if (this.color.g < MAX_COLOR_LIMIT) this.color.g++;
+        if (this.color.g > MIN_COLOR_LIMIT) this.color.g--;
         break;
       case 'b':
-        if (this.color.b < MAX_COLOR_LIMIT) this.color.b++;
+        if (this.color.b > MIN_COLOR_LIMIT) this.color.b--;
         break;
     }
 

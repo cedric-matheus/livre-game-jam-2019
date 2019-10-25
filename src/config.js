@@ -4,8 +4,8 @@ import scenes from './scenes';
 
 export const DEFAULT_WIDTH = 1920;
 export const DEFAULT_HEIGHT = 1080;
-export const MAX_COLOR_LIMIT = 220;
-export const MIN_COLOR_LIMIT = 50;
+export const MAX_COLOR_LIMIT = 240;
+export const MIN_COLOR_LIMIT = 20;
 
 const config = {
   type: Phaser.AUTO,

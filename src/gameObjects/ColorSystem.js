@@ -213,11 +213,11 @@ class ColorSystem extends Phaser.GameObjects.Sprite {
     const color = this.getColor();
     switch (color) {
       case 'r':
-        return `rgb(${MAX_COLOR_LIMIT}, ${MIN_COLOR_LIMIT}, ${MIN_COLOR_LIMIT})`;
+        return `rgb(${MIN_COLOR_LIMIT}, ${MAX_COLOR_LIMIT}, ${MAX_COLOR_LIMIT})`;
       case 'g':
-        return `rgb(${MIN_COLOR_LIMIT}, ${MAX_COLOR_LIMIT}, ${MIN_COLOR_LIMIT})`;
+        return `rgb(${MAX_COLOR_LIMIT}, ${MIN_COLOR_LIMIT}, ${MAX_COLOR_LIMIT})`;
       case 'b':
-        return `rgb(${MIN_COLOR_LIMIT}, ${MIN_COLOR_LIMIT}, ${MAX_COLOR_LIMIT})`;
+        return `rgb(${MAX_COLOR_LIMIT}, ${MAX_COLOR_LIMIT}, ${MIN_COLOR_LIMIT})`;
     }
   }
 
