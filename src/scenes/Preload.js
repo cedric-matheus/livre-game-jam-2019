@@ -28,11 +28,11 @@ import popUpBackgroundImg from '../assets/images/popUpBackground.png';
 
 // audios
 import musicAud from '../assets/audios/music.mp3';
-import changeColorAud from '../assets/audios/changeColor.ogg';
-import toggleValveAud from '../assets/audios/toggleValve.ogg';
-import bookAud from '../assets/audios/book.ogg';
-import corkAud from '../assets/audios/cork.ogg';
-import liquidFallingAud from '../assets/audios/liquidFalling.ogg';
+import changeColorAud from '../assets/audios/changeColor.mp3';
+import toggleValveAud from '../assets/audios/toggleValve.mp3';
+import bookAud from '../assets/audios/book.mp3';
+import corkAud from '../assets/audios/cork.mp3';
+import liquidFallingAud from '../assets/audios/liquidFalling.mp3';
 
 class Preload extends Phaser.Scene {
   constructor() {
