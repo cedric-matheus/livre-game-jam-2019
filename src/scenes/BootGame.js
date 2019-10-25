@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 import Game from './Game';
 
-import logoImg from '../assets/images/logo.png';
+import logoImg from '../assets/images/eclipse.png';
 
 // configure game and load loading asset
 class BootGame extends Phaser.Scene {
