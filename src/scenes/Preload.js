@@ -43,7 +43,6 @@ class Preload extends Phaser.Scene {
   preload() {
     // show loading screen
     this.logo = this.add.image(960, 540, 'logo');
-    this.logo.rotation = 0.78;
 
     this.tweens.add({
       // adding the wheel to tween targets
